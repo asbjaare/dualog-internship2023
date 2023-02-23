@@ -3,11 +3,15 @@ namespace dualog_internship2023
 {
     public class Speed : IFormattable
     {
-        private double speed;
+        public double SpeedValue { get; }
 
         public Speed(double speed)
         {
-            this.speed = speed;
+            if (speed < 0)
+            {
+                throw new ArgumentException("Speed can not be negative", nameof(speed));
+            }
+            SpeedValue = speed;
         }
 
         public string ToString(string? format, IFormatProvider? formatProvider)
@@ -18,11 +22,11 @@ namespace dualog_internship2023
             }
             if (format == "KN")
             {
-                return $"Speed: {speed} knots";
+                return $"Speed: {SpeedValue} knots";
             }
             else if (format == "MS")
             {
-                return $"Speed: {speed * 0.514444} m/s";
+                return $"Speed: {SpeedValue * 0.514444} m/s";
             }
             else
             {
@@ -30,5 +34,4 @@ namespace dualog_internship2023
             }
         }
     }
-
 }
